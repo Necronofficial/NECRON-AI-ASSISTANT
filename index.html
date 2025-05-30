@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Assistant UI</title>
-<link rel="stylesheet" href="style.css" />
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Chat UI</title>
+ <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Left Side Indicators -->
-    <div class="indicators">
-      <div class="dot blue"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
+ <div class="chat-container">
+  <div class="sidebar">
+   <div class="user-profile">
+    <div class="avatar">
+     <span>S</span>
     </div>
-
-    <!-- File Attachment Icon -->
-    <div class="file-attach">
-      <img src="file-attach-icon.png" alt="Attach" />
+    <div class="user-info">
+     <span class="username">SIRIRAJ</span>
+     <span class="status">
+      <span class="online-indicator"></span> Online
+      <span class="listening-indicator"></span> Listening
+      <span class="typing-indicator"></span> Replying
+     </span>
     </div>
-
-    <!-- Main Chat Area -->
-    <div class="chat">
-      <!-- AI Logo with Animated Aura -->
-      <div class="ai-logo-container listening">
-        <img src="friday-logo.png" alt="Friday AI" class="ai-logo" />
-        <div class="aura"></div>
-      </div>
-
-      <!-- Emoji Mood -->
-      <div class="emoji-mood">😊</div>
-
-      <!-- Chat Messages -->
-      <div class="chat-history">
-        <div class="message user"><strong>You:</strong> Hello</div>
-        <div class="message ai"><strong>FRIDAY:</strong> Hello, Sir, how can I assist you today?</div>
-      </div>
-
-      <!-- Input Area -->
-      <div class="input-area">
-        <input type="text" placeholder="Type your message..." id="userInput" />
-        <div class="icons">
-          <img src="send-icon.png" alt="Send" id="sendBtn" />
-          <img src="speaker-icon.png" alt="Speaker" id="speakerBtn" class="active" />
-          <img src="mic-icon.png" alt="Mic" id="micBtn" />
-        </div>
-      </div>
-    </div>
+   </div>
   </div>
-
-  <script src="script.js"></script>
+  <div class="chat-area">
+   <div class="message received">
+    <p>To download BGMI in the background, Sir, I'd need to use a different approach. Since you're looking for a background download, I'll need to check if your device allows for this feature.</p>
+    <span class="timestamp">20:34</span>
+   </div>
+   <div class="message received">
+    <p>Are you using an Android device, Sir? This might require enabling a specific setting for background downloads.</p>
+    <span class="timestamp">20:34</span>
+   </div>
+   <div class="message sent">
+    <p>Can I download bgmi in background</p>
+    <span class="timestamp">20:34</span>
+   </div>
+   <div class="message received">
+    <div class="direct-download">
+     Direct download
+     <span class="timestamp">20:34</span>
+    </div>
+   </div>
+   <div class="message received">
+    <p>Link to the Play Store for your convenience?</p>
+    <span class="timestamp">20:34</span>
+   </div>
+  </div>
+  <div class="input-area">
+   <input type="text" placeholder="Type your message here...">
+   <button class="send-button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+     <path fill-rule="evenodd" d="M12 2.25c-5.384 0-9.75 4.366-9.75 9.75s4.366 9.75 9.75 9.75 9.75-4.366 9.75-9.75S17.384 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.94l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
+    </svg>
+   </button>
+  </div>
+ </div>
 </body>
 </html>

@@ -1,60 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Chat UI</title>
- <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRIRAJ AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0b0f1a;
+      color: white;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00f2ff, #001f3f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      animation: glow 2s infinite ease-in-out;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #00f2ff; }
+      50% { box-shadow: 0 0 25px #00f2ff; }
+      100% { box-shadow: 0 0 10px #00f2ff; }
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .status span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .status .online { background: yellow; }
+    .status .listening { background: lime; }
+    .status .replying { background: skyblue; }.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: auto;
+  padding: 20px;
+  gap: 10px;
+}
+.message {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.message.user { background: #0044ff; align-self: flex-end; }
+.message.bot { background: #1c1f2f; align-self: flex-start; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.input-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #1e2330;
+  border-top: 1px solid #333;
+}
+.input-bar input {
+  flex: 1;
+  padding: 10px;
+  background: #0b0f1a;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+.input-bar button {
+  background: #00f2ff;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+  </style>
 </head>
 <body>
- <div class="chat-container">
-  <div class="sidebar">
-   <div class="user-profile">
-    <div class="avatar">
-     <span>S</span>
-    </div>
-    <div class="user-info">
-     <span class="username">SIRIRAJ</span>
-     <span class="status">
-      <span class="online-indicator"></span> Online
-      <span class="listening-indicator"></span> Listening
-      <span class="typing-indicator"></span> Replying
-     </span>
-    </div>
-   </div>
-  </div>
-  <div class="chat-area">
-   <div class="message received">
-    <p>To download BGMI in the background, Sir, I'd need to use a different approach. Since you're looking for a background download, I'll need to check if your device allows for this feature.</p>
-    <span class="timestamp">20:34</span>
-   </div>
-   <div class="message received">
-    <p>Are you using an Android device, Sir? This might require enabling a specific setting for background downloads.</p>
-    <span class="timestamp">20:34</span>
-   </div>
-   <div class="message sent">
-    <p>Can I download bgmi in background</p>
-    <span class="timestamp">20:34</span>
-   </div>
-   <div class="message received">
-    <div class="direct-download">
-     Direct download
-     <span class="timestamp">20:34</span>
-    </div>
-   </div>
-   <div class="message received">
-    <p>Link to the Play Store for your convenience?</p>
-    <span class="timestamp">20:34</span>
-   </div>
-  </div>
-  <div class="input-area">
-   <input type="text" placeholder="Type your message here...">
-   <button class="send-button">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-     <path fill-rule="evenodd" d="M12 2.25c-5.384 0-9.75 4.366-9.75 9.75s4.366 9.75 9.75 9.75 9.75-4.366 9.75-9.75S17.384 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.94l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
-    </svg>
-   </button>
-  </div>
- </div>
-</body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <div class="avatar">S</div>
+        <div class="status">
+          <span class="online"></span> Online
+          <span class="listening"></span> Listening
+          <span class="replying"></span> Replying
+        </div>
+      </div>
+      <div>
+        <h2>SRIRAJ<br><span style="font-size: 14px; font-weight: normal;">AI Assistant 🤖</span></h2>
+      </div>
+    </div><div class="chat" id="chat">
+  <div class="message user">Can u download bgm in background</div>
+  <div class="message bot">To download BGM in the background, Sir, I'd need to use a different approach. Since you're looking for a background download, I'll need to check if your device allows for this feature.</div>
+</div>
+
+<div class="input-bar">
+  <input type="text" placeholder="Type your message here..." id="input" />
+  <button onclick="sendMessage()">➤</button>
+</div>
+
+  </div>  <script>
+    function sendMessage() {
+      const input = document.getElementById('input');
+      const chat = document.getElementById('chat');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.textContent = input.value;
+      chat.appendChild(userMsg);
+
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'message bot';
+        botMsg.textContent = `You said: ${input.value}`;
+        chat.appendChild(botMsg);
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script></body>
 </html>

@@ -1,0 +1,16 @@
+python-dotenv
+groq
+pyttsx3
+SpeechRecognition # A good alternative/wrapper for STT if Vosk/Whisper setup is complex
+sounddevice # For audio input/output, often used with Vosk/Whisper
+numpy # Dependency for sounddevice and others
+pyautogui
+Pillow # For basic image manipulation if needed
+opencv-python # If you plan advanced animation/image processing in UI
+vosk # If you choose Vosk for STT
+# whisper # If you choose Whisper for STT (requires C++ build tools on Windows)
+# pyaudio # Often needed for SpeechRecognition, might need manual installation for some OS
+# websocket-client # If using Vosk WebSocket server
+PyQt5 # If you choose PyQt5 for UI
+Kivy # If you choose Kivy for UI
+# sqlite3 # Built-in, no need to list

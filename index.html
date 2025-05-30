@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Assistant UI</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Left Side Indicators -->
+    <div class="indicators">
+      <div class="dot blue"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+
+    <!-- File Attachment Icon -->
+    <div class="file-attach">
+      <img src="file-attach-icon.png" alt="Attach" />
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat">
+      <!-- AI Logo with Animated Aura -->
+      <div class="ai-logo-container listening">
+        <img src="friday-logo.png" alt="Friday AI" class="ai-logo" />
+        <div class="aura"></div>
+      </div>
+
+      <!-- Emoji Mood -->
+      <div class="emoji-mood">😊</div>
+
+      <!-- Chat Messages -->
+      <div class="chat-history">
+        <div class="message user"><strong>You:</strong> Hello</div>
+        <div class="message ai"><strong>FRIDAY:</strong> Hello, Sir, how can I assist you today?</div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <input type="text" placeholder="Type your message..." id="userInput" />
+        <div class="icons">
+          <img src="send-icon.png" alt="Send" id="sendBtn" />
+          <img src="speaker-icon.png" alt="Speaker" id="speakerBtn" class="active" />
+          <img src="mic-icon.png" alt="Mic" id="micBtn" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,45 +1,61 @@
-const micBtn = document.getElementById('micBtn');
-const speakerBtn = document.getElementById('speakerBtn');
-const sendBtn = document.getElementById('sendBtn');
-const aiLogoContainer = document.querySelector('.ai-logo-container');
+// Element references
+const micToggle = document.getElementById('micToggle');
+const speakerToggle = document.getElementById('speakerToggle');
+const sendIcon = document.querySelector('img[alt="Send"]');
+const inputBox = document.querySelector('.chat-box input');
+const chatContainer = document.querySelector('.main');
 
-let micOn = false;
-let speakerOn = true;
+let micOn = true;
+let speakerOn = false;
 
 // Toggle Mic
-micBtn.addEventListener('click', () => {
+micToggle.addEventListener('click', () => {
   micOn = !micOn;
-  micBtn.classList.toggle('active', micOn);
-  if (micOn) {
-    aiLogoContainer.classList.add('listening');
-  } else {
-    aiLogoContainer.classList.remove('listening');
-  }
+  micToggle.src = micOn ? 'micon-icon.png' : 'micoff-icon.png';
 });
 
 // Toggle Speaker
-speakerBtn.addEventListener('click', () => {
+speakerToggle.addEventListener('click', () => {
   speakerOn = !speakerOn;
-  speakerBtn.classList.toggle('active', speakerOn);
+  speakerToggle.src = speakerOn ? 'speakeron-icon.png' : 'speakeroff-icon.png';
 });
 
 // Send Message
-sendBtn.addEventListener('click', () => {
-  const input = document.getElementById('userInput');
-  const message = input.value.trim();
-  if (message) {
-    addMessage('user', message);
-    input.value = '';
-    // Simulate AI response
-    setTimeout(() => addMessage('ai', 'Sure, I can do that.'), 1000);
-  }
+sendIcon.addEventListener('click', sendMessage);
+
+// Press Enter to Send
+inputBox.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') sendMessage();
 });
 
+function sendMessage() {
+  const msg = inputBox.value.trim();
+  if (!msg) return;
+
+  addMessage('user', msg);
+  inputBox.value = '';
+
+  // Simulate AI Response (Replace this with your backend call)
+  setTimeout(() => {
+    addMessage('ai', 'Sure, I can help with that.');
+    if (speakerOn) {
+      speak('Sure, I can help with that.');
+    }
+  }, 1000);
+}
+
 function addMessage(sender, text) {
-  const chatHistory = document.querySelector('.chat-history');
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message', sender);
-  messageDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'FRIDAY'}:</strong> ${text}`;
-  chatHistory.appendChild(messageDiv);
-  chatHistory.scrollTop = chatHistory.scrollHeight;
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'message';
+  msgDiv.style.margin = '10px 0';
+  msgDiv.style.textAlign = sender === 'user' ? 'right' : 'left';
+  msgDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'FRIDAY'}:</strong> ${text}`;
+  chatContainer.appendChild(msgDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Text-to-Speech
+function speak(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(utterance);
 }

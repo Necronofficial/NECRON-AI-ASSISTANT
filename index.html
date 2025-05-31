@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,13 +16,17 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      padding: 20px;
       box-sizing: border-box;
     }
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 20px;
+      background-color: #0b0f1a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     .avatar {
       width: 100px;
@@ -40,93 +45,123 @@
       100% { box-shadow: 0 0 10px #00f2ff; }
     }
     .status {
-      margin-top: 10px;
-      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-left: 10px;
     }
     .status span {
       display: inline-block;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
+      margin-right: 5px;
     }
-    .status .online { background: yellow; }
-    .status .listening { background: lime; }
-    .status .replying { background: skyblue; }.chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow-y: auto;
-  padding: 20px;
-  gap: 10px;
-}
-.message {
-  max-width: 60%;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-  animation: fadeIn 0.5s ease-in-out;
-}
-.message.user { background: #0044ff; align-self: flex-end; }
-.message.bot { background: #1c1f2f; align-self: flex-start; }
+    .indicator {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+    }
+    .online { background: gray; }
+    .listening { background: gray; animation: blink 1s infinite; opacity: 0; }
+    .replying { background: gray; }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
 
-.input-bar {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background: #1e2330;
-  border-top: 1px solid #333;
-}
-.input-bar input {
-  flex: 1;
-  padding: 10px;
-  background: #0b0f1a;
-  border: none;
-  color: white;
-  font-size: 16px;
-}
-.input-bar button {
-  background: #00f2ff;
-  border: none;
-  padding: 10px 15px;
-  margin-left: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow-y: auto;
+      padding: 20px;
+      gap: 10px;
+    }
+    .message {
+      max-width: 60%;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .message.user { background: #0044ff; align-self: flex-end; }
+    .message.bot { background: #1c1f2f; align-self: flex-start; }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #1e2330;
+      border-top: 1px solid #333;
+    }
+    .input-bar input {
+      flex: 1;
+      padding: 10px;
+      background: #0b0f1a;
+      border: none;
+      color: white;
+      font-size: 16px;
+    }
+    .input-bar button, .input-bar .icon-btn {
+      background: #00f2ff;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: black;
+      font-size: 16px;
+    }
+    .input-bar .left-icons {
+      display: flex;
+      gap: 10px;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <div>
-        <div class="avatar">S</div>
-        <div class="status">
-          <span class="online"></span> Online
-          <span class="listening"></span> Listening
-          <span class="replying"></span> Replying
-        </div>
+      <div class="avatar">S</div>
+      <div class="status">
+        <div class="indicator"><span class="online" id="online-dot"></span> Online</div>
+        <div class="indicator"><span class="listening" id="listening-dot"></span> Listening</div>
+        <div class="indicator"><span class="replying" id="replying-dot"></span> Replying</div>
       </div>
       <div>
         <h2>SRIRAJ<br><span style="font-size: 14px; font-weight: normal;">AI Assistant 🤖</span></h2>
       </div>
-    </div><div class="chat" id="chat">
-  <div class="message user">Can u download bgm in background</div>
-  <div class="message bot">To download BGM in the background, Sir, I'd need to use a different approach. Since you're looking for a background download, I'll need to check if your device allows for this feature.</div>
-</div>
+    </div>
 
-<div class="input-bar">
-  <input type="text" placeholder="Type your message here..." id="input" />
-  <button onclick="sendMessage()">➤</button>
-</div>
+    <div class="chat" id="chat">
+      <div class="message user">Can u download bgm in background</div>
+      <div class="message bot">To download BGM in the background, Sir, I'd need to use a different approach. Since you're looking for a background download, I'll need to check if your device allows for this feature.</div>
+    </div>
 
-  </div>  <script>
+    <div class="input-bar">
+      <div class="left-icons">
+        <button class="icon-btn" onclick="attachFile()">📎</button>
+      </div>
+      <input type="text" placeholder="Type your message here..." id="input" />
+      <button onclick="toggleMic()" id="mic-btn">🎤</button>
+      <button onclick="toggleSpeaker()" id="speaker-btn">🔈</button>
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    let micOn = false;
+    let speakerOn = true;
+
     function sendMessage() {
       const input = document.getElementById('input');
       const chat = document.getElementById('chat');
@@ -135,16 +170,44 @@
       userMsg.textContent = input.value;
       chat.appendChild(userMsg);
 
+      // Show listening and replying states
+      document.getElementById('listening-dot').style.background = 'lime';
       setTimeout(() => {
+        document.getElementById('replying-dot').style.background = 'skyblue';
         const botMsg = document.createElement('div');
         botMsg.className = 'message bot';
         botMsg.textContent = `You said: ${input.value}`;
         chat.appendChild(botMsg);
-        chat.scrollTop = chat.scrollHeight;
-      }, 500);
+
+        // Reset states
+        setTimeout(() => {
+          document.getElementById('listening-dot').style.background = 'gray';
+          document.getElementById('replying-dot').style.background = 'gray';
+        }, 500);
+      }, 1000);
 
       input.value = '';
       chat.scrollTop = chat.scrollHeight;
     }
-  </script></body>
+
+    function toggleMic() {
+      micOn = !micOn;
+      const micBtn = document.getElementById('mic-btn');
+      micBtn.textContent = micOn ? '🔇' : '🎤';
+    }
+
+    function toggleSpeaker() {
+      speakerOn = !speakerOn;
+      const speakerBtn = document.getElementById('speaker-btn');
+      speakerBtn.textContent = speakerOn ? '🔈' : '🔇';
+    }
+
+    function attachFile() {
+      alert("File attachment functionality coming soon!");
+    }
+
+    // Start with AI online
+    document.getElementById('online-dot').style.background = 'yellow';
+  </script>
+</body>
 </html>

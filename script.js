@@ -1,61 +1,47 @@
-// Element references
-const micToggle = document.getElementById('micToggle');
-const speakerToggle = document.getElementById('speakerToggle');
-const sendIcon = document.querySelector('img[alt="Send"]');
-const inputBox = document.querySelector('.chat-box input');
-const chatContainer = document.querySelector('.main');
+const micBtn = document.getElementById('micToggle');
+const speakerBtn = document.getElementById('speakerToggle');
+const sendBtn = document.querySelector('.chat-box img[alt="Send"]');
+const input = document.querySelector('.chat-box input');
+const chatHistory = document.getElementById('chat');
 
 let micOn = true;
-let speakerOn = false;
+let speakerOn = true;
 
 // Toggle Mic
-micToggle.addEventListener('click', () => {
+micBtn.addEventListener('click', () => {
   micOn = !micOn;
-  micToggle.src = micOn ? 'micon-icon.png' : 'micoff-icon.png';
+  micBtn.src = micOn ? 'micon-icon.png' : 'micoff-icon.png';
+  fetch('/toggle_mic', { method: 'POST', body: JSON.stringify({ mic: micOn }), headers: { 'Content-Type': 'application/json' } });
 });
 
 // Toggle Speaker
-speakerToggle.addEventListener('click', () => {
+speakerBtn.addEventListener('click', () => {
   speakerOn = !speakerOn;
-  speakerToggle.src = speakerOn ? 'speakeron-icon.png' : 'speakeroff-icon.png';
+  speakerBtn.src = speakerOn ? 'speakeron-icon.png' : 'speakeroff-icon.png';
+  fetch('/toggle_speaker', { method: 'POST', body: JSON.stringify({ speaker: speakerOn }), headers: { 'Content-Type': 'application/json' } });
 });
 
 // Send Message
-sendIcon.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', async () => {
+  const message = input.value.trim();
+  if (!message) return;
+  addMessage('user', message);
+  input.value = '';
 
-// Press Enter to Send
-inputBox.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') sendMessage();
+  const res = await fetch('/chat', {
+    method: 'POST',
+    body: JSON.stringify({ message }),
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  const data = await res.json();
+  addMessage('ai', data.reply || 'Sorry, no response.');
 });
-
-function sendMessage() {
-  const msg = inputBox.value.trim();
-  if (!msg) return;
-
-  addMessage('user', msg);
-  inputBox.value = '';
-
-  // Simulate AI Response (Replace this with your backend call)
-  setTimeout(() => {
-    addMessage('ai', 'Sure, I can help with that.');
-    if (speakerOn) {
-      speak('Sure, I can help with that.');
-    }
-  }, 1000);
-}
 
 function addMessage(sender, text) {
   const msgDiv = document.createElement('div');
-  msgDiv.className = 'message';
-  msgDiv.style.margin = '10px 0';
-  msgDiv.style.textAlign = sender === 'user' ? 'right' : 'left';
+  msgDiv.classList.add('message', sender);
   msgDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'FRIDAY'}:</strong> ${text}`;
-  chatContainer.appendChild(msgDiv);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-// Text-to-Speech
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  speechSynthesis.speak(utterance);
+  chatHistory.appendChild(msgDiv);
+  chatHistory.scrollTop = chatHistory.scrollHeight;
 }

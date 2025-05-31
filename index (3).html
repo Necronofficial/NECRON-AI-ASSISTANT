@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRIRAJ AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0b0f1a;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0b0f1a;
+      z-index: 1000;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-image: url('friday-logo.png');
+      background-size: cover;
+      animation: glow 2s infinite ease-in-out;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #00f2ff; }
+      50% { box-shadow: 0 0 25px #00f2ff; }
+      100% { box-shadow: 0 0 10px #00f2ff; }
+    }
+    .status span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .online { background: yellow; }
+    .listening { background: grey; animation: blink 1s infinite; }
+    .replying { background: grey; }@keyframes blink {
+  50% { opacity: 0; }
+}
+.main {
+  flex: 1;
+  margin-top: 110px;
+  margin-bottom: 80px;
+  overflow-y: auto;
+  padding: 20px;
+}
+.placeholder {
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+  margin-top: 40%;
+}
+.chat-box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1e2330;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-box img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.chat-box input {
+  flex: 1;
+  padding: 10px;
+  background: #0b0f1a;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="avatar"></div>
+      <div class="status">
+        <span class="online"></span> Online
+        <span class="listening"></span> Listening
+        <span class="replying"></span> Replying
+      </div>
+    </div>
+    <div>
+      <h2>SRIRAJ<br><span style="font-size: 14px; font-weight: normal;">AI Assistant 🤖</span></h2>
+    </div>
+  </div>  <div class="main" id="chat">
+    <div class="placeholder">Welcome to Siri AI Assistant!</div>
+  </div>  <div class="chat-box">
+    <img src="file-attach-icon.png" alt="Attach" />
+    <input type="text" placeholder="Type your message here...">
+    <img src="micon-icon.png" alt="Mic On" id="micToggle">
+    <img src="speakeroff-icon.png" alt="Speaker Off" id="speakerToggle">
+    <img src="send-icon.png" alt="Send">
+  </div>  <script>
+    const chat = document.getElementById('chat');
+    chat.scrollTop = chat.scrollHeight;
+
+    // Example toggle functionality (can expand later)
+    document.getElementById('micToggle').addEventListener('click', function() {
+      this.src = this.src.includes('micoff') ? 'micon-icon.png' : 'micoff-icon.png';
+    });
+    document.getElementById('speakerToggle').addEventListener('click', function() {
+      this.src = this.src.includes('speakeron') ? 'speakeroff-icon.png' : 'speakeron-icon.png';
+    });
+  </script></body>
+</html>

@@ -14,3 +14,6 @@ vosk # If you choose Vosk for STT
 PyQt5 # If you choose PyQt5 for UI
 Kivy # If you choose Kivy for UI
 # sqlite3 # Built-in, no need to list
+flask
+pyaudio
+requests
